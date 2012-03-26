@@ -1,0 +1,52 @@
+<?php if (!empty($this->infoMessage)): ?>
+	<div id="info-message"><?php echo $this->infoMessage; ?></div>
+<?php endif; ?>
+<h3 class="employee-list">Employee list</h3>
+<span id="add-employee"><a href="<?php echo $this->indexUrl('add', 'employees'); ?>">Add Employee</a></span>
+<div class="clear"></div>
+<table align="middle" width="100%"> 
+    <thead> 
+        <tr>
+            <th width="10%" >ID</th>
+            <th width="25%" >Employee Name</th>
+            <th width="25%" >Employer Name</th>
+            <th width="15%" >Certificate #</th>
+            <th width="10%" >Birth Date</th>
+		    <th width="15%">Action</th>
+        </tr> 
+	</thead> 
+    <tbody> 
+        <?php foreach($this->employees as $employee): ?>
+	    <tr>
+            <td><?php echo $employee->employeeId; ?></td>
+            <td><?php echo $this->escape($employee->getFullName()); ?></td>
+            <td><?php echo $this->escape($employee->employerName); ?></td>
+            <td><?php echo $this->escape($employee->certificate); ?></td>
+            <td><?php echo $this->escape($employee->birthDate); ?></td>
+            <td>
+            	<a href="<?php echo $this->indexUrl('add', 'employees', array('employeeId' => $employee->employeeId)); ?>">Edit</a>&nbsp;&nbsp;
+				<a href="<?php echo $this->indexUrl('delete', 'employees', array('employeeId' => $employee->employeeId)); ?>">Delete</a>
+            </td>
+        </tr>
+       <?php endforeach; ?>  
+	         
+		<?php if ((count($this->employees) == 0)) :?>      
+		  <tr>
+		    <td colspan="7" class="info">No employees were found.</td>
+		  </tr>
+		<?php endif; ?>
+		
+    </tbody>
+</table>
+
+<div class="clear"></div>
+
+<?php echo $this->paginationControl($this->employees, 'Sliding', 'paginator.phtml', array('params' => $this->params)); ?>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+	//slide up information message
+	$('#info-message').slideUp(1500);	
+});
+</script>

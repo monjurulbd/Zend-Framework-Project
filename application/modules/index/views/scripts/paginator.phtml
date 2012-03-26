@@ -1,0 +1,40 @@
+<?php $this->params = count($this->params) ? $this->params : array();?>
+<?php if ($this->pageCount > 1): ?> 
+	<ul class="pagination">
+	
+		<!-- Previous page link --> 
+		<?php if (isset($this->previous)): ?> 
+			<li class="previous">
+				<a href="<?php echo $this->url(array_merge($this->params, array('page' => $this->previous)))?>">
+					&laquo; Previous
+				</a>
+			</li>
+		<?php else: ?> 
+		  	<li class="previous-off"> &laquo; Previous </li> 
+		<?php endif; ?> 
+		
+		<!-- Numbered page links -->
+		<?php foreach ($this->pagesInRange as $page): ?> 
+		  <?php if ($page != $this->current): ?>
+		  	<li>
+			  <a href="<?php echo $this->url(array_merge($this->params, array('page' => $page)))?>">
+				  <?php echo $page; ?>
+			  </a>
+			</li>
+		  <?php else: ?>
+			<li class="active"> <?php echo $page; ?></li> 
+		  <?php endif; ?>
+		<?php endforeach; ?>
+		
+		<!-- Next page link --> 
+		<?php if (isset($this->next)): ?> 
+			<li class="next">
+				<a href="<?php echo $this->url(array_merge($this->params, array('page' => $this->next)))?>">
+					Next &raquo;
+				</a>
+			</li>
+		<?php else: ?> 
+			<li class="next-off"> Next &raquo; </li>
+		<?php endif; ?> 
+	</ul> 
+<?php endif; ?>

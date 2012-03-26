@@ -1,0 +1,13 @@
+
+    <h2><?php echo $this->exception->getMessage() ?></h2>
+    <div class="clear" style="height: 20px"></div>
+    <h3>Stack trace:</h3>
+    <div class="clear" style="height: 5px"></div>
+    <pre style="font-size: 12px"><?php echo $this->exception->getTraceAsString() ?>
+    </pre>
+    <div class="clear" style="height: 20px"></div>
+    <h3>Request Parameters:</h3>
+    <div class="clear" style="height: 5px"></div>
+    <pre style="font-size: 12px"><?php echo var_export($this->request->getParams(), 1) ?>
+    </pre>
+<?php exit;?>
